@@ -1,14 +1,22 @@
 {
   "targets": [
     {
-    "xcode_settings": {
-     "OTHER_CPLUSPLUSFLAGS": [ "'-I../node_modules/nan'"],
-    },
       "target_name": "testmodule",
-      "sources": [ "src/main.cc" ],
-      "include_dirs": [
-        "<!(node -e \"require('nan')\")"
-      ]
+      "sources": [ "src/async.cc" ],
+      "link_settings": {
+          "conditions":[
+              ['OS=="mac"', {
+                  "libraries": [
+                      'Foundation.framework',
+                  ],
+              }
+          ]]
+      },
+      "xcode_settings": {
+          "OTHER_CFLAGS": [
+              "-x objective-c++ -stdlib=libc++"
+          ]
+      },
     }
   ]
 }
